@@ -51,7 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\FPController.cs" />
+     <Compile Include="Assets\Scripts\FPCameraController.cs" />
+     <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
      <None Include="Assets\Imports\Sci-fi_platforms\Sci-fi_platforms.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programme/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
