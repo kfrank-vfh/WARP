@@ -10,12 +10,19 @@ public class FPCameraController : MonoBehaviour {
 	public float rotationX = 0.0f;
 	public float rotationY = 0.0f;
 
+	public float maxFieldView = 60.0f;
+	public float minFieldView = 45.0f;
+	public float zoomTime = 0.3f;
+
 	private GameObject player;
 	private GameObject _camera;
+	private Camera cameraComponent;
+	private bool zoomed = false;
 
 	void Start() {
 		player = GameObject.Find("Player");
 		_camera = player.transform.Find("FirstPerson/Camera").gameObject;
+		cameraComponent = _camera.GetComponent<Camera>();
 	}
 
 	// Update is called once per frame
@@ -28,5 +35,23 @@ public class FPCameraController : MonoBehaviour {
 		rotationY -= speedY * Input.GetAxis("Mouse Y");
 		float _rotationY = rotationY > 90.0f ? 90.0f : (rotationY < -90.0f ? -90.0f : rotationY);
 		this._camera.transform.eulerAngles = new Vector3(_rotationY, rotationX, 0.0f);
+
+		// process right click
+		bool rightMouseButtonClicked = Input.GetAxis("Fire2") == 1.0f;
+		if(!rightMouseButtonClicked && !zoomed) {
+			return;
+		}
+
+		zoomed = true;
+		float fieldOfView = cameraComponent.fieldOfView;
+		fieldOfView += Time.deltaTime * (1 / zoomTime) * (maxFieldView - minFieldView) * (rightMouseButtonClicked ? -1.0f : 1.0f);
+
+		fieldOfView = fieldOfView < minFieldView ? minFieldView : fieldOfView;
+		if(fieldOfView > maxFieldView) {
+			fieldOfView = maxFieldView;
+			zoomed = false;
+		}
+
+		cameraComponent.fieldOfView = fieldOfView;
 	}
 }

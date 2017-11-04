@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.125, g: 0.125, b: 0.125, a: 1}
+  m_AmbientSkyColor: {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -840,10 +840,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e26379b01fdc045a2df3250ea7a4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 3
+  speedX: 5
   speedY: 2
   rotationX: 0
   rotationY: 0
+  maxFieldView: 60
+  minFieldView: 45
+  zoomTime: 0.2
 --- !u!1 &431334389
 GameObject:
   m_ObjectHideFlags: 0
