@@ -4,29 +4,48 @@ using UnityEngine;
 
 public class WarpController : MonoBehaviour {
 
+	private GameObject player;
 	private GameObject cameraObject;
 	private GameObject particleObject;
 
 	private ParticleSystem particleComponent;
 
+	private bool leftMouseReleased = true;
+
 
 	// Use this for initialization
 	void Start () {
-		cameraObject = GameObject.Find("Player/FirstPerson/Camera");
+		player = GameObject.Find("Player");
+		cameraObject = player.transform.Find("FirstPerson/Camera").gameObject;
 		particleObject = GameObject.Find("WarpTargetMarker");
 		particleComponent = particleObject.GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		// check if richt mouse button is pressed
 		bool rightMouseButtonClicked = Input.GetAxis("Fire2") == 1.0f;
 		RaycastHit hit;
 		if(!rightMouseButtonClicked) {
+			// if not, deactivate particle system
 			updateParticleSystem(null);
 			return;
 		}
+		// else do raycast and update particle system
 		hit = doRaycast();
 		updateParticleSystem(hit);
+		// check if left mouse button is pressed
+		bool leftMouseButtonClicked = Input.GetAxis("Fire1") == 1.0f;
+		if(!leftMouseButtonClicked) {
+			leftMouseReleased = true;
+			return;
+		}
+		if(!leftMouseReleased) {
+			return;
+		}
+		leftMouseReleased = false;
+		// execute warp
+		executeWarp(hit);
 	}
 
 	private RaycastHit doRaycast() {
@@ -62,5 +81,12 @@ public class WarpController : MonoBehaviour {
 		if(particleComponent.isPlaying) {
 			particleComponent.Stop();
 		}
+	}
+
+	private void executeWarp(RaycastHit hit) {
+		if(hit.collider == null) {
+			return;
+		}
+		player.transform.position = new Vector3(hit.point.x, hit.point.y + 1.0f, hit.point.z);
 	}
 }
