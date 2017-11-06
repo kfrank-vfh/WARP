@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 77786152}
   - component: {fileID: 77786151}
   - component: {fileID: 77786150}
+  - component: {fileID: 77786153}
   m_Layer: 0
   m_Name: Step1.1
   m_TagString: Untagged
@@ -276,6 +277,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 77786148}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &77786153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 77786148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f185c513d62b9e94098304befd8ebe85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiling: {x: 5, y: 1}
+  offset: {x: 0, y: 0}
 --- !u!1 &94607814
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +334,7 @@ GameObject:
   - component: {fileID: 106199105}
   - component: {fileID: 106199104}
   m_Layer: 0
-  m_Name: Wall1 (2)
+  m_Name: Wall5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +531,7 @@ GameObject:
   - component: {fileID: 306976233}
   - component: {fileID: 306976232}
   m_Layer: 0
-  m_Name: Wall1 (4)
+  m_Name: Wall7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -601,7 +615,7 @@ GameObject:
   - component: {fileID: 357184276}
   - component: {fileID: 357184275}
   m_Layer: 0
-  m_Name: Ground2 (1)
+  m_Name: Wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1057,7 +1071,7 @@ GameObject:
   - component: {fileID: 657860321}
   - component: {fileID: 657860320}
   m_Layer: 0
-  m_Name: Wall1 (3)
+  m_Name: Wall6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1865,7 +1879,7 @@ GameObject:
   - component: {fileID: 1201330464}
   - component: {fileID: 1201330463}
   m_Layer: 0
-  m_Name: Wall1 (1)
+  m_Name: Wall3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5553,7 +5567,7 @@ GameObject:
   - component: {fileID: 1405141323}
   - component: {fileID: 1405141322}
   m_Layer: 0
-  m_Name: Ground2 (1)
+  m_Name: Wall4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
