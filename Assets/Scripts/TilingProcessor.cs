@@ -26,8 +26,12 @@ public class TilingProcessor : MonoBehaviour {
 		if(renderer != null) {
 			TilingProcessor props = obj.GetComponent<TilingProcessor>();
 			Material mat = renderer.material;
-			mat.SetTextureScale("_MainTex", props == null ? getDefaultTiling(obj.transform.localScale) : props.tiling);
-			mat.SetTextureOffset("_MainTex", props == null ? defaultOffset : props.offset);
+			Vector2 tiling = props == null ? getDefaultTiling(obj.transform.localScale) : props.tiling;
+			Vector2 offset = props == null ? defaultOffset : props.offset;
+			mat.SetTextureScale("_MainTex", tiling);
+			mat.SetTextureScale("_BumpMap", tiling);
+			mat.SetTextureOffset("_MainTex", offset);
+			mat.SetTextureOffset("_BumpMap", offset);
 		}
 		foreach (Transform child in transform) {
 			recursiveProcessTiling(child);
