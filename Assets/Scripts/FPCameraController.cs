@@ -23,6 +23,7 @@ public class FPCameraController : MonoBehaviour {
 		player = GameObject.Find("Player");
 		_camera = player.transform.Find("FirstPerson/Camera").gameObject;
 		cameraComponent = _camera.GetComponent<Camera>();
+		rotationX = player.transform.eulerAngles.y;
 	}
 
 	// Update is called once per frame

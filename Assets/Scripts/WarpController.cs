@@ -40,7 +40,7 @@ public class WarpController : MonoBehaviour {
 			leftMouseReleased = true;
 			return;
 		}
-		if(!leftMouseReleased) {
+		if(!leftMouseReleased || hit.transform.gameObject.tag != "WarpGround") {
 			return;
 		}
 		leftMouseReleased = false;
