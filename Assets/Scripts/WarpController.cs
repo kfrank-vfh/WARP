@@ -32,7 +32,7 @@ public class WarpController : MonoBehaviour {
 			return;
 		}
 		// else do raycast and update particle system
-		hit = doRaycast();
+		hit = doRaycast(cameraObject.transform.position, cameraObject.transform.forward);
 		updateParticleSystem(hit);
 		// check if left mouse button is pressed
 		bool leftMouseButtonClicked = Input.GetAxis("Fire1") == 1.0f;
@@ -48,11 +48,19 @@ public class WarpController : MonoBehaviour {
 		executeWarp(hit);
 	}
 
-	private RaycastHit doRaycast() {
-		Vector3 origin = cameraObject.transform.position;
-		Vector3 direction = cameraObject.transform.forward;
+	private RaycastHit doRaycast(Vector3 origin, Vector3 direction) {
+		// do raycast
 		RaycastHit hit;
 		Physics.Raycast(origin, direction, out hit);
+		// check if ray hit mirror
+		if(hit.transform.gameObject.tag == "Mirrors") {
+			// do raycast again with reflected ray
+			Vector3 reflectedDirection = Vector3.Reflect(direction, hit.normal);
+			return doRaycast(hit.point, reflectedDirection);
+			Debug.Log("Mirror Hit: true");
+		}
+		Debug.Log("Mirror Hit: false");
+		// else return raycast hit information
 		return hit;
 	}
 

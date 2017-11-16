@@ -45,9 +45,7 @@ public class ReflectionRenderer : MonoBehaviour {
 
 	private bool isVisible() {
 		Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(fpCamera);
-		bool visible = GeometryUtility.TestPlanesAABB(frustumPlanes, planeRenderer.bounds);
-		Debug.Log("visible: " + visible);
-		return visible;
+		return GeometryUtility.TestPlanesAABB(frustumPlanes, planeRenderer.bounds);
 	}
 
 	private bool isPointVisible(Vector3 point) {
