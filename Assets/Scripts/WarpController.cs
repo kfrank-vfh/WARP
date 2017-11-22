@@ -53,7 +53,7 @@ public class WarpController : MonoBehaviour {
 		RaycastHit hit;
 		Physics.Raycast(origin, direction, out hit);
 		// check if ray hit mirror
-		if(hit.transform.gameObject.tag == "Mirrors") {
+		if(hit.collider != null && hit.transform.gameObject.tag == "Mirrors") {
 			// do raycast again with reflected ray
 			Vector3 reflectedDirection = Vector3.Reflect(direction, hit.normal);
 			return doRaycast(hit.point, reflectedDirection);
