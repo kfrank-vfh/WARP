@@ -57,9 +57,7 @@ public class WarpController : MonoBehaviour {
 			// do raycast again with reflected ray
 			Vector3 reflectedDirection = Vector3.Reflect(direction, hit.normal);
 			return doRaycast(hit.point, reflectedDirection);
-			Debug.Log("Mirror Hit: true");
 		}
-		Debug.Log("Mirror Hit: false");
 		// else return raycast hit information
 		return hit;
 	}
