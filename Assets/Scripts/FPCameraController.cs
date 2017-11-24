@@ -7,35 +7,39 @@ public class FPCameraController : MonoBehaviour {
 	public float speedX = 3.0f;
 	public float speedY = 2.0f;
 
-	public float rotationX = 0.0f;
-	public float rotationY = 0.0f;
-
 	public float maxFieldView = 60.0f;
 	public float minFieldView = 45.0f;
 	public float zoomTime = 0.3f;
 
-	private GameObject player;
-	private GameObject _camera;
+	private GameObject playerObject;
+	private GameObject cameraObject;
 	private Camera cameraComponent;
 	private bool zoomed = false;
 
 	void Start() {
-		player = GameObject.Find("Player");
-		_camera = player.transform.Find("FirstPerson/Camera").gameObject;
-		cameraComponent = _camera.GetComponent<Camera>();
-		rotationX = player.transform.eulerAngles.y;
+		playerObject = GameObject.Find("Player");
+		cameraObject = playerObject.transform.Find("FirstPerson/Camera").gameObject;
+		cameraComponent = cameraObject.GetComponent<Camera>();
 	}
 
 	// Update is called once per frame
 	void Update () {
+		// get current rotation
+		Vector3 rotation = cameraObject.transform.eulerAngles;
+		float rotationX = rotation.y;
+		float rotationY = rotation.x;
+
 		// process rotation X
 		rotationX += speedX * Input.GetAxis("Mouse X");
-		this.player.transform.eulerAngles = new Vector3(0.0f, rotationX, 0.0f);
+		this.playerObject.transform.eulerAngles = new Vector3(0.0f, rotationX, 0.0f);
 
 		// process rotation Y
 		rotationY -= speedY * Input.GetAxis("Mouse Y");
-		float _rotationY = rotationY > 90.0f ? 90.0f : (rotationY < -90.0f ? -90.0f : rotationY);
-		this._camera.transform.eulerAngles = new Vector3(_rotationY, rotationX, 0.0f);
+		if(90.0f < rotationY && rotationY < 270.0f) {
+			rotationY = rotationY < 180.0f ? 90.0f : 270.0f;
+		}
+
+		this.cameraObject.transform.eulerAngles = new Vector3(rotationY, rotationX, 0.0f);
 
 		// process right click
 		bool rightMouseButtonClicked = Input.GetAxis("Fire2") == 1.0f;
@@ -54,5 +58,15 @@ public class FPCameraController : MonoBehaviour {
 		}
 
 		cameraComponent.fieldOfView = fieldOfView;
+	}
+
+	public void lookAt(Vector3 position) {
+		// orientate player to position
+		playerObject.transform.LookAt(position);
+		// reset player x and z rotation
+		Vector3 rotation = new Vector3(0.0f, playerObject.transform.eulerAngles.y, 0.0f);
+		playerObject.transform.eulerAngles = rotation;
+		// orientate camera to position
+		cameraObject.transform.LookAt(position);
 	}
 }
