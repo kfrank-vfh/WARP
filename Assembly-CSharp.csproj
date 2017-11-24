@@ -52,10 +52,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\FPCameraController.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\ReflectionRenderer.cs" />
      <Compile Include="Assets\Scripts\TilingProcessor.cs" />
-     <Compile Include="Assets\Scripts\WarpController.cs" />
      <None Include="Assets\Imports\Sci-fi_platforms\Sci-fi_platforms.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Programme/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
