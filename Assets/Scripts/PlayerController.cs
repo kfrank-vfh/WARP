@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Kino;
 
 public class PlayerController : MonoBehaviour {
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 	private FPCameraController cameraController;
 	private CharacterController characterController;
 	private ParticleSystem particleComponent;
+	private Kino.Motion motionBlurComponent;
 
 	void Start () {
 		// init game objects
@@ -36,8 +38,10 @@ public class PlayerController : MonoBehaviour {
 		cameraController = cameraObject.GetComponent<FPCameraController>();
 		characterController = GetComponent<CharacterController>();
 		particleComponent = particleObject.GetComponent<ParticleSystem>();
+		motionBlurComponent = cameraObject.GetComponent<Kino.Motion>();
 		// set initial state
 		state = State.MOVING;
+		motionBlurComponent.enabled = false;
 	}
 	
 	void Update () {
@@ -100,6 +104,7 @@ public class PlayerController : MonoBehaviour {
 		// execute warp
 		setWarpPath(rayPath);
 		state = State.WARPING;
+		motionBlurComponent.enabled = true;
 	}
 
 	private List<RaycastHit> doRaycast(Vector3 origin, Vector3 direction) {
@@ -179,6 +184,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			// else end the warp
 			state = State.MOVING;
+			motionBlurComponent.enabled = false;
 		}
 	}
 
