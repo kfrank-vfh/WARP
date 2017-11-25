@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 	// PUBLIC CONFIGURATION VARIABLES
 	public float speed = 6.0f;
+	public float warpSpeed = 60.0f;
 	public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
 
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;
 	private bool leftMouseReleased = true;
 	private List<RaycastHit> warpPath;
+	private Dictionary<RaycastHit, Vector3> targetPositions;
 
 	// GAME OBJECTS
 	private GameObject player;
@@ -21,7 +23,8 @@ public class PlayerController : MonoBehaviour {
 	private GameObject particleObject;
 
 	// COMPONENTS
-	private CharacterController controller;
+	private FPCameraController cameraController;
+	private CharacterController characterController;
 	private ParticleSystem particleComponent;
 
 	void Start () {
@@ -30,7 +33,8 @@ public class PlayerController : MonoBehaviour {
 		cameraObject = player.transform.Find("FirstPerson/Camera").gameObject;
 		particleObject = GameObject.Find("WarpTargetMarker");
 		// init components
-		controller = GetComponent<CharacterController>();
+		cameraController = cameraObject.GetComponent<FPCameraController>();
+		characterController = GetComponent<CharacterController>();
 		particleComponent = particleObject.GetComponent<ParticleSystem>();
 		// set initial state
 		state = State.MOVING;
@@ -46,8 +50,9 @@ public class PlayerController : MonoBehaviour {
 		}
 		// process warping if state = WARPING
 		if(state == State.WARPING) {
-			executeWarp(warpPath[warpPath.Count-1]);
-			state = State.MOVING;
+			processWarping();
+			//executeWarp(warpPath[warpPath.Count-1]);
+			//state = State.MOVING;
 		}
 	}
 
@@ -58,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void processMovingInput() {
-		if(controller.isGrounded) {
+		if(characterController.isGrounded) {
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= speed;
@@ -67,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		moveDirection.y -= gravity * Time.deltaTime;
-		controller.Move(moveDirection * Time.deltaTime);
+		characterController.Move(moveDirection * Time.deltaTime);
 	}
 
 	private void processWarpInput() {
@@ -93,7 +98,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		leftMouseReleased = false;
 		// execute warp
-		warpPath = rayPath;
+		setWarpPath(rayPath);
 		state = State.WARPING;
 	}
 
@@ -150,11 +155,61 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void executeWarp(RaycastHit hit) {
-		if(hit.collider == null) {
+	private void setWarpPath(List<RaycastHit> rayPath) {
+		warpPath = rayPath;
+		targetPositions = new Dictionary<RaycastHit, Vector3>();
+		foreach (RaycastHit rayHit in warpPath) {
+			Vector3 targetPoint = rayHit.point;
+			targetPoint += rayHit.normal.y > 0 ? Vector3.up : (rayHit.normal.y < 0 ? Vector3.down : Vector3.zero);
+			targetPositions.Add(rayHit, targetPoint);
+		}
+	}
+
+	private void processWarping() {
+		// check if there is a next warp point
+		if(warpPath.Count > 0) {
+			// if so, move to the next
+			Vector3 targetPosition = targetPositions[warpPath[0]];
+			Vector3 playerPosition = player.transform.position;
+			Vector3 moveDirection = targetPosition - playerPosition;
+			if(moveDirection.magnitude > warpSpeed * Time.deltaTime) {
+				moveDirection = moveDirection.normalized * warpSpeed * Time.deltaTime;
+			}
+			characterController.Move(moveDirection);
+		} else {
+			// else end the warp
+			state = State.MOVING;
+		}
+	}
+
+	void OnControllerColliderHit(ControllerColliderHit hit) {
+		// do nothing if not warping
+		if(state != State.WARPING) {
 			return;
 		}
-		player.transform.position = new Vector3(hit.point.x, hit.point.y + 1.0f, hit.point.z);
+		// check if the game object of the next warp target was hit
+		RaycastHit warpPoint = warpPath[0];
+		GameObject hitObject = hit.transform.gameObject;
+		if(warpPoint.transform.gameObject != hitObject) {
+			return;
+		}
+		// set max distance depending on hit object
+		float maxDistance = hitObject.tag == "Mirrors" ? Mathf.Infinity : 0.1f;
+		// calculate distance to target position
+		Vector3 targetPosition = targetPositions[warpPoint];
+		float distance = Vector3.Distance(player.transform.position, targetPosition);
+		// check if close enough to the target position
+		if(distance < maxDistance) {
+			// remove current warp point
+			targetPositions.Remove(warpPoint);
+			warpPath.RemoveAt(0);
+			// adjust camera look if there is a next point
+			if(warpPath.Count > 0) {
+				targetPosition = targetPositions[warpPath[0]];
+				Vector3 lookAtPosition = targetPosition + Vector3.up;
+				cameraController.lookAt(lookAtPosition);
+			}
+		}
 	}
 
 	enum State {
