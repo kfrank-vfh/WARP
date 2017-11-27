@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour {
 
 	// PUBLIC CONFIGURATION VARIABLES
 	public float speed = 6.0f;
-	public float warpSpeed = 60.0f;
 	public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
+
+	// PRIVATE CONFIGURATION VARIABLES
+	private float warpTime = 0.3f;
+	private float minWarpSpeed = 20.0f;
 
 	// PRIVATE STATE VARIABLES
 	private State state = State.DISABLED;
@@ -17,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 	private bool leftMouseReleased = true;
 	private List<RaycastHit> warpPath;
 	private Dictionary<RaycastHit, Vector3> targetPositions;
+	private float warpSpeed;
 
 	// GAME OBJECTS
 	private GameObject player;
@@ -162,12 +166,17 @@ public class PlayerController : MonoBehaviour {
 
 	private void setWarpPath(List<RaycastHit> rayPath) {
 		warpPath = rayPath;
+		// calculate target positions to warp path and warp speed to distance
+		float distance = 0.0f;
 		targetPositions = new Dictionary<RaycastHit, Vector3>();
 		foreach (RaycastHit rayHit in warpPath) {
 			Vector3 targetPoint = rayHit.point;
 			targetPoint += rayHit.normal.y > 0 ? Vector3.up : (rayHit.normal.y < 0 ? Vector3.down : Vector3.zero);
 			targetPositions.Add(rayHit, targetPoint);
+			distance += rayHit.distance;
 		}
+		warpSpeed = distance / warpTime;
+		warpSpeed = warpSpeed < minWarpSpeed ? minWarpSpeed : warpSpeed;
 	}
 
 	private void processWarping() {

@@ -3085,6 +3085,7 @@ GameObject:
   - component: {fileID: 413657489}
   - component: {fileID: 413657488}
   - component: {fileID: 413657492}
+  - component: {fileID: 413657493}
   m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
@@ -3157,7 +3158,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -3178,6 +3179,24 @@ MonoBehaviour:
   maxFieldView: 60
   minFieldView: 45
   zoomTime: 0.2
+--- !u!114 &413657493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 413657486}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860e82cd7a6bb4a29a4b7add4ec78d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shutterAngle: 270
+  _sampleCount: 8
+  _frameBlending: 0.3
+  _reconstructionShader: {fileID: 4800000, guid: 60701d53f4c638048b5e49c197d08b77,
+    type: 3}
+  _frameBlendingShader: {fileID: 4800000, guid: 95caa7c3844725840aec8dad64ac258e,
+    type: 3}
 --- !u!1 &431334389
 GameObject:
   m_ObjectHideFlags: 0
@@ -6576,7 +6595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  warpSpeed: 50
+  warpTime: 0.3
   jumpSpeed: 8
   gravity: 20
 --- !u!1 &967196236
