@@ -170,10 +170,21 @@ public class PlayerController : MonoBehaviour {
 		float distance = 0.0f;
 		targetPositions = new Dictionary<RaycastHit, Vector3>();
 		foreach (RaycastHit rayHit in warpPath) {
+			// sum up distance
+			distance += rayHit.distance;
+			// calculate the expected target point
 			Vector3 targetPoint = rayHit.point;
 			targetPoint += rayHit.normal.y > 0 ? Vector3.up : (rayHit.normal.y < 0 ? Vector3.down : Vector3.zero);
+			// check if target point is to close to wall and correct
+			foreach (Vector3 direction in new Vector3[] {Vector3.forward, Vector3.back, Vector3.right, Vector3.left}) {
+				RaycastHit hit;
+				Physics.Raycast(targetPoint, direction, out hit, characterController.radius);
+				if(hit.collider != null && hit.transform.gameObject.tag != "Mirrors") {
+					targetPoint = hit.point - direction;
+				}
+			}
+			// add target point to position list
 			targetPositions.Add(rayHit, targetPoint);
-			distance += rayHit.distance;
 		}
 		warpSpeed = distance / warpTime;
 		warpSpeed = warpSpeed < minWarpSpeed ? minWarpSpeed : warpSpeed;
