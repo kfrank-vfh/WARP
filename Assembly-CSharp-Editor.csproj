@@ -58,6 +58,7 @@
      <None Include="Assets\Kino\Motion\Shader\Reconstruction.cginc" />
      <None Include="Assets\Kino\Motion\Shader\FrameBlending.shader" />
      <None Include="Assets\Kino\Motion\Shader\Common.cginc" />
+     <None Include="Assets\Resources\credits.txt" />
      <None Include="Assets\Imports\Sci-fi_platforms\Sci-fi_platforms.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>D:/Programme/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>

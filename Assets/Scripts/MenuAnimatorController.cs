@@ -14,6 +14,7 @@ public class MenuAnimatorController : MonoBehaviour {
 		menuToId = new Dictionary<string, int>();
 		menuToId.Add("title", 0);
 		menuToId.Add("options", 1);
+		menuToId.Add("credits", 2);
 	}
 
 	public void showMenu(string menu) {

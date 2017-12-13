@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 public class PersistenceManager {
 
@@ -20,5 +21,9 @@ public class PersistenceManager {
 			stream.Close();
 		}
 		return obj;
+	}
+
+	public static string readTextResource(string filePath) {
+		return ((TextAsset) Resources.Load(filePath, typeof(TextAsset))).text;
 	}
 }
