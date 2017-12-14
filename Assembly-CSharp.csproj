@@ -54,6 +54,7 @@
      <Compile Include="Assets\Kino\Motion\Motion.cs" />
      <Compile Include="Assets\Kino\Motion\Script\FrameBlendingFilter.cs" />
      <Compile Include="Assets\Kino\Motion\Script\ReconstructionFilter.cs" />
+     <Compile Include="Assets\Scripts\CreditsManager.cs" />
      <Compile Include="Assets\Scripts\FPCameraController.cs" />
      <Compile Include="Assets\Scripts\MenuAnimatorController.cs" />
      <Compile Include="Assets\Scripts\OptionsManager.cs" />
