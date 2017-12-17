@@ -434,7 +434,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1085052389}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5638,6 +5638,7 @@ GameObject:
   - component: {fileID: 1345581331}
   - component: {fileID: 1345581334}
   - component: {fileID: 1345581333}
+  - component: {fileID: 1345581335}
   m_Layer: 5
   m_Name: HighscorePanel
   m_TagString: Untagged
@@ -5734,6 +5735,19 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &1345581335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1345581329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 636e231f5fba07747a847300515a5170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highscoreEntryPrefab: {fileID: 1994782479572796, guid: 4cec573ea217fa84db70510bb3b59951,
+    type: 2}
 --- !u!1 &1347163443
 GameObject:
   m_ObjectHideFlags: 0

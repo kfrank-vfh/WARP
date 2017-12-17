@@ -8595,6 +8595,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 1517948831098742, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
+      propertyPath: m_TagString
+      value: Mirrors
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
   m_IsPrefabParent: 0
@@ -14369,6 +14373,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 1517948831098742, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
+      propertyPath: m_TagString
+      value: Mirrors
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
   m_IsPrefabParent: 0
@@ -15751,6 +15759,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 1517948831098742, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
+      propertyPath: m_TagString
+      value: Mirrors
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
   m_IsPrefabParent: 0
@@ -16566,6 +16578,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 1517948831098742, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
+      propertyPath: m_TagString
+      value: Mirrors
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
   m_IsPrefabParent: 0
@@ -16706,7 +16722,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1517948831098742, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
       propertyPath: m_Name
-      value: Mirror (1)
+      value: Mirror
       objectReference: {fileID: 0}
     - target: {fileID: 4326549988199904, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -16735,6 +16751,10 @@ Prefab:
         type: 2}
       propertyPath: m_TimeSlicingMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517948831098742, guid: 0879f3fea6d533145871163a4771aab0, type: 2}
+      propertyPath: m_TagString
+      value: Mirrors
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0879f3fea6d533145871163a4771aab0, type: 2}

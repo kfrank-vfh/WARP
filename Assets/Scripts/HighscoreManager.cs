@@ -33,7 +33,7 @@ public class HighscoreManager : MonoBehaviour {
 		// remove all entries in table panel
 		while (tablePanel.childCount > 0) {
 			Transform child = tablePanel.GetChild(0);
-			child.parent = null;
+			child.SetParent(null);
 			child.gameObject.SetActive(false);
 			Destroy(child.gameObject);
 		}

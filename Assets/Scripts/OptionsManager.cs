@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OptionsManager : MonoBehaviour {
 
@@ -112,9 +113,22 @@ public class OptionsManager : MonoBehaviour {
 	}
 
 	public void AdoptOptions() {
+		// set and save current options
 		Options uiOptions = getOptionsFromUI();
 		CURRENT_OPTIONS = uiOptions;
 		PersistenceManager.saveData(OPTIONS_FILE, uiOptions);
+		// adopt options to unity engine
+		Screen.SetResolution(uiOptions.resolutionWidth, uiOptions.resolutionHeight, true);
+		QualitySettings.SetQualityLevel(graphicsQualityDropdown.value);
+		if(SceneManager.GetActiveScene().name.Equals("LevelScene")) {
+			GameObject[] mirrors = GameObject.FindGameObjectsWithTag("Mirrors");
+			foreach (GameObject mirror in mirrors) {
+				ReflectionProbe probe = mirror.transform.Find("ReflectionProbe").GetComponent<ReflectionProbe>();
+				probe.resolution = uiOptions.reflectionQuality;
+			}
+		}
+		AudioListener.volume = uiOptions.volume;
+		// show title menu
 		menuAnimatorController.showMenu("title");
 	}
 
