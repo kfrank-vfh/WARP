@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuAnimatorController : MonoBehaviour {
 
@@ -22,6 +24,12 @@ public class MenuAnimatorController : MonoBehaviour {
 	public void showMenu(string menu) {
 		int menuId = menuToId[menu];
 		menuAnimator.SetInteger("MenuId", menuId);
+	}
+
+	public void startGame() {
+		Text text = GameObject.Find("MenuCanvas/EnterNamePanel/EnterNameField/Text").GetComponent<Text>();
+		GameStatsController.setPlayerName(text.text);
+		SceneManager.LoadScene("LevelScene");
 	}
 
 	public void QuitGame() {
