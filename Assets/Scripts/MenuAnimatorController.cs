@@ -22,4 +22,8 @@ public class MenuAnimatorController : MonoBehaviour {
 		int menuId = menuToId[menu];
 		menuAnimator.SetInteger("MenuId", menuId);
 	}
+
+	public void QuitGame() {
+		Application.Quit();
+	}
 }

@@ -19,7 +19,6 @@ public class OptionsManager : MonoBehaviour {
 
 	void Start () {
 		OPTIONS_FILE = Application.persistentDataPath + "/options.dat";
-		Debug.Log("OPTIONS_FILE: " + OPTIONS_FILE);
 		menuAnimatorController = GameObject.Find("MenuCanvas").GetComponent<MenuAnimatorController>();
 		determineUiElements();
 		initDropdownValues();
@@ -84,14 +83,14 @@ public class OptionsManager : MonoBehaviour {
 			}
 		}
 		// set selected graphics quality
-		for(int i = 0; i < graphicsQualityDropdown.options.Capacity; i++) {
+		for(int i = 0; i < graphicsQualityDropdown.options.Count; i++) {
 			if(graphicsQualityDropdown.options[i].text.Equals(opts.graphicsQuality)) {
 				graphicsQualityDropdown.value = i;
 				break;
 			}
 		}
 		// set selected reflection quality
-		for(int i = 0; i < reflectionQualityDropdown.options.Capacity; i++) {
+		for(int i = 0; i < reflectionQualityDropdown.options.Count; i++) {
 			if(reflectionQualityDropdown.options[i].text.Equals(opts.reflectionQuality.ToString())) {
 				reflectionQualityDropdown.value = i;
 				break;
