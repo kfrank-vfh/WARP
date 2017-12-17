@@ -12,13 +12,20 @@ public class MenuAnimatorController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// get menu animator
 		menuAnimator = gameObject.GetComponent<Animator>();
+		// map sub menu names to ids
 		menuToId = new Dictionary<string, int>();
 		menuToId.Add("title", 0);
 		menuToId.Add("options", 1);
 		menuToId.Add("credits", 2);
 		menuToId.Add("highscore", 3);
 		menuToId.Add("entername", 4);
+		// set menu state depending on Scene
+		if(SceneManager.GetActiveScene().name.Equals("MainMenu")) {
+			menuAnimator.SetBool("MenuVisible", true);
+			GetComponent<Canvas>().enabled = true;
+		}
 	}
 
 	public void showMenu(string menu) {
@@ -30,6 +37,27 @@ public class MenuAnimatorController : MonoBehaviour {
 		Text text = GameObject.Find("MenuCanvas/EnterNamePanel/EnterNameField/Text").GetComponent<Text>();
 		GameStatsController.setPlayerName(text.text);
 		SceneManager.LoadScene("LevelScene");
+	}
+
+	public void continueGame() {
+		StartCoroutine(continueGameCoroutine());
+	}
+
+	private IEnumerator continueGameCoroutine() {
+		menuAnimator.SetBool("MenuVisible", false);
+		yield return new WaitForSeconds(0.5f);
+		// TODO enable controls
+	}
+
+	public void goToTitleMenu() {
+		StartCoroutine(goToTitleMenuCoroutine());
+	}
+
+	private IEnumerator goToTitleMenuCoroutine() {
+		menuAnimator.SetBool("MenuVisible", false);
+		yield return new WaitForSeconds(0.5f);
+		Destroy(GameObject.Find("GameStats"));
+		SceneManager.LoadScene("MainMenu");
 	}
 
 	public void QuitGame() {
