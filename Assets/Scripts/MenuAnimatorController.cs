@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class MenuAnimatorController : MonoBehaviour {
 
 	private Animator menuAnimator;
+	private Canvas canvas;
+	private PlayerController playerController;
 
 	private Dictionary<string, int> menuToId;
 
@@ -14,6 +16,7 @@ public class MenuAnimatorController : MonoBehaviour {
 	void Start () {
 		// get menu animator
 		menuAnimator = gameObject.GetComponent<Animator>();
+		canvas = GetComponent<Canvas>();
 		// map sub menu names to ids
 		menuToId = new Dictionary<string, int>();
 		menuToId.Add("title", 0);
@@ -24,7 +27,19 @@ public class MenuAnimatorController : MonoBehaviour {
 		// set menu state depending on Scene
 		if(SceneManager.GetActiveScene().name.Equals("MainMenu")) {
 			menuAnimator.SetBool("MenuVisible", true);
-			GetComponent<Canvas>().enabled = true;
+			canvas.enabled = true;
+		} else if(SceneManager.GetActiveScene().name.Equals("LevelScene")) {
+			playerController = GameObject.Find("/Player").GetComponent<PlayerController>();
+		}
+	}
+
+	void Update() {
+		if(Input.GetKeyDown("escape")) {
+			Debug.Log("escape key down");
+			bool visible = menuAnimator.GetBool("MenuVisible");
+			visible = !visible;
+			menuAnimator.SetBool("MenuVisible", visible);
+			playerController.pauseGame(visible);
 		}
 	}
 

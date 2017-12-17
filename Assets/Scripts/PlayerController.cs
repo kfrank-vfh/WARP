@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 
 	// PRIVATE STATE VARIABLES
 	private State state = State.DISABLED;
+	private State previousState;
 	private Vector3 moveDirection = Vector3.zero;
 	private bool leftMouseReleased = true;
 	private List<RaycastHit> warpPath;
@@ -49,8 +50,9 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
-		// always process application quit input
-		processApplicationQuit();
+		if(Input.GetKeyDown("escape")) {
+			Application.Quit();
+		}
 		// process moving input if state = MOVING
 		if(state == State.MOVING) {
 			processMovingInput();
@@ -61,12 +63,6 @@ public class PlayerController : MonoBehaviour {
 			processWarping();
 			//executeWarp(warpPath[warpPath.Count-1]);
 			//state = State.MOVING;
-		}
-	}
-
-	private void processApplicationQuit() {
-		if(Input.GetKeyDown("escape")) {
-			Application.Quit();
 		}
 	}
 
@@ -235,6 +231,19 @@ public class PlayerController : MonoBehaviour {
 				Vector3 lookAtPosition = targetPosition + Vector3.up;
 				cameraController.lookAt(lookAtPosition);
 			}
+		}
+	}
+
+	public void pauseGame(bool pause) {
+		if(pause && state != State.DISABLED) {
+			Time.timeScale = 0f;
+			previousState = state;
+			state = State.DISABLED;
+			cameraController.pause(true);
+		} else if(!pause && state == State.DISABLED) {
+			Time.timeScale = 1f;
+			state = previousState;
+			cameraController.pause(false);
 		}
 	}
 

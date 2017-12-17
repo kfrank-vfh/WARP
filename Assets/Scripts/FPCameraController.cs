@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FPCameraController : MonoBehaviour {
 
+	private static bool disabled = false;
+
 	public float speedX = 3.0f;
 	public float speedY = 2.0f;
 
@@ -24,6 +26,9 @@ public class FPCameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if(disabled) {
+			return;
+		}
 		// get current rotation
 		Vector3 rotation = cameraObject.transform.eulerAngles;
 		float rotationX = rotation.y;
@@ -68,5 +73,9 @@ public class FPCameraController : MonoBehaviour {
 		playerObject.transform.eulerAngles = rotation;
 		// orientate camera to position
 		cameraObject.transform.LookAt(position);
+	}
+
+	public void pause(bool pause) {
+		disabled = pause;
 	}
 }
