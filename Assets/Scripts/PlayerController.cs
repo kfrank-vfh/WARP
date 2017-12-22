@@ -50,9 +50,6 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(Input.GetKeyDown("escape")) {
-			Application.Quit();
-		}
 		// process moving input if state = MOVING
 		if(state == State.MOVING) {
 			processMovingInput();
@@ -236,12 +233,12 @@ public class PlayerController : MonoBehaviour {
 
 	public void pauseGame(bool pause) {
 		if(pause && state != State.DISABLED) {
-			Time.timeScale = 0f;
+			//Time.timeScale = 0f;
 			previousState = state;
 			state = State.DISABLED;
 			cameraController.pause(true);
 		} else if(!pause && state == State.DISABLED) {
-			Time.timeScale = 1f;
+			//Time.timeScale = 1f;
 			state = previousState;
 			cameraController.pause(false);
 		}

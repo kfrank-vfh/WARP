@@ -35,7 +35,6 @@ public class MenuAnimatorController : MonoBehaviour {
 
 	void Update() {
 		if(Input.GetKeyDown("escape")) {
-			Debug.Log("escape key down");
 			bool visible = menuAnimator.GetBool("MenuVisible");
 			visible = !visible;
 			menuAnimator.SetBool("MenuVisible", visible);
