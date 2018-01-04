@@ -38,7 +38,11 @@ public class MenuAnimatorController : MonoBehaviour {
 			bool visible = menuAnimator.GetBool("MenuVisible");
 			visible = !visible;
 			menuAnimator.SetBool("MenuVisible", visible);
-			playerController.pauseGame(visible);
+			if(visible) {
+				playerController.pauseGame(true);
+			} else {
+				continueGame();
+			}
 		}
 	}
 
@@ -60,7 +64,7 @@ public class MenuAnimatorController : MonoBehaviour {
 	private IEnumerator continueGameCoroutine() {
 		menuAnimator.SetBool("MenuVisible", false);
 		yield return new WaitForSeconds(0.5f);
-		// TODO enable controls
+		playerController.pauseGame(false);
 	}
 
 	public void goToTitleMenu() {
@@ -70,6 +74,7 @@ public class MenuAnimatorController : MonoBehaviour {
 	private IEnumerator goToTitleMenuCoroutine() {
 		menuAnimator.SetBool("MenuVisible", false);
 		yield return new WaitForSeconds(0.5f);
+		playerController.pauseGame(false);
 		Destroy(GameObject.Find("GameStats"));
 		SceneManager.LoadScene("MainMenu");
 	}
