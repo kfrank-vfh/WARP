@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\PersistenceManager.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\ReflectionRenderer.cs" />
+     <Compile Include="Assets\Scripts\StorySceneController.cs" />
      <Compile Include="Assets\Scripts\TilingProcessor.cs" />
      <Compile Include="Assets\Scripts\TV_AnimationController.cs" />
      <None Include="Assets\Kino\Motion\Shader\Prefilter.cginc" />

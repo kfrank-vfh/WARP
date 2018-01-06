@@ -11,7 +11,6 @@ public class TV_AnimationController : MonoBehaviour {
 	private TV_AnimationController parentController;
 	private GameObject playerObject;
 	private Animator tvAnimator;
-	private MeshRenderer monitorImageRenderer;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +18,6 @@ public class TV_AnimationController : MonoBehaviour {
 		tvAnimator = GetComponent<Animator>();
 		if(tvAnimator != null) {
 			// game object is TV
-			monitorImageRenderer = transform.Find("MonitorImage").GetComponent<MeshRenderer>();
 		} else if(GetComponent<Collider>() != null) {
 			// game object is trigger
 			playerObject = GameObject.Find("Player");

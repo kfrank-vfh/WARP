@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinalDoor : MonoBehaviour {
 
@@ -60,12 +61,12 @@ public class FinalDoor : MonoBehaviour {
 		// check if player is looking to door
 		Vector3 direction = finalDoor.transform.position - cameraObject.transform.position;
 		float angle = Vector3.Angle(direction, cameraObject.transform.forward);
-		Debug.Log("angle: " + angle);
 		if(angle >= 85) {
 			return;
 		}
 
 		StartCoroutine(finalCoroutine());
+		GameStatsController.setPlayEndTime(Time.time);
 		Destroy(GetComponent<CapsuleCollider>());
 	}
 
@@ -73,12 +74,10 @@ public class FinalDoor : MonoBehaviour {
 		playerController.pauseGame(true);
 		cameraController.lerpTo(finalDoor.transform.position, 1f);
 		yield return new WaitForSeconds(1f);
-		Debug.Log("Lerp End");
 		doorAnimator.SetTrigger("open");
 		startTime = Time.time;
 		openDoor = true;
-		yield return new WaitForSeconds(1f);
-		Debug.Log("Fog Animation End");
-		// TODO
+		yield return new WaitForSeconds(2f);
+		SceneManager.LoadScene("StoryScene");
 	}
 }
