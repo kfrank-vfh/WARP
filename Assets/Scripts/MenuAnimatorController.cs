@@ -54,7 +54,7 @@ public class MenuAnimatorController : MonoBehaviour {
 	public void startGame() {
 		Text text = GameObject.Find("MenuCanvas/EnterNamePanel/EnterNameField/Text").GetComponent<Text>();
 		GameStatsController.setPlayerName(text.text);
-		SceneManager.LoadScene("LevelScene");
+		SceneManager.LoadScene("StoryScene");
 	}
 
 	public void continueGame() {

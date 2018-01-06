@@ -51,10 +51,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Imports\Tazo_fx\Script\BillBoard.cs" />
+     <Compile Include="Assets\Imports\Tazo_fx\Script\tazo_rotate.cs" />
+     <Compile Include="Assets\Imports\Tazo_fx\Script\tazo_UVScroller.cs" />
      <Compile Include="Assets\Kino\Motion\Motion.cs" />
      <Compile Include="Assets\Kino\Motion\Script\FrameBlendingFilter.cs" />
      <Compile Include="Assets\Kino\Motion\Script\ReconstructionFilter.cs" />
      <Compile Include="Assets\Scripts\CreditsManager.cs" />
+     <Compile Include="Assets\Scripts\FinalDoor.cs" />
      <Compile Include="Assets\Scripts\FPCameraController.cs" />
      <Compile Include="Assets\Scripts\GameStatsController.cs" />
      <Compile Include="Assets\Scripts\HighscoreManager.cs" />

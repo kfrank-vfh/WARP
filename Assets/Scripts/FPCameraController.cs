@@ -18,6 +18,10 @@ public class FPCameraController : MonoBehaviour {
 	private Camera cameraComponent;
 	private bool zoomed = false;
 
+	private bool lerping;
+	private float lerpTime;
+	private Vector3 lerpToPosition;
+
 	void Start() {
 		playerObject = GameObject.Find("Player");
 		cameraObject = playerObject.transform.Find("FirstPerson/Camera").gameObject;
@@ -26,6 +30,24 @@ public class FPCameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if(lerping) {
+			Vector3 direction = lerpToPosition - cameraObject.transform.position;
+			//Vector3 eRotation = new Vector3(cameraObject.transform.eulerAngles.x, playerObject.transform.eulerAngles.y, 0f);
+			//eRotation = cameraObject.transform.eulerAngles;
+			//Debug.Log("eRotation: " + eRotation);
+			//Quaternion qRotation = Quaternion.Euler(eRotation);
+			//Debug.Log("qRotation: " + qRotation);
+			//Vector3 forward = qRotation * Vector3.forward;
+			Quaternion toRotation = Quaternion.FromToRotation(cameraObject.transform.forward, direction);
+			Debug.Log("fromRotation: " + cameraObject.transform.rotation +  "toRotation: " + toRotation);
+			float lerpSpeed = lerpTime < Time.deltaTime ? 1f : Time.deltaTime / lerpTime;
+			setRotation(Quaternion.Lerp(cameraObject.transform.rotation, toRotation, lerpSpeed));
+			lerpTime -= Time.deltaTime;
+			if(lerpTime <= 0) {
+				lerping = false;
+			}
+		}
+
 		if(disabled) {
 			return;
 		}
@@ -73,6 +95,19 @@ public class FPCameraController : MonoBehaviour {
 		playerObject.transform.eulerAngles = rotation;
 		// orientate camera to position
 		cameraObject.transform.LookAt(position);
+	}
+
+	public void setRotation(Quaternion qRotation) {
+		Vector3 eRotation = qRotation.eulerAngles;
+		playerObject.transform.eulerAngles = new Vector3(0f, eRotation.y, 0f);
+		cameraObject.transform.eulerAngles = new Vector3(eRotation.x, eRotation.y, 0f);
+	}
+
+	public void lerpTo(Vector3 position, float time) {
+		lerpTime = time;
+		lerpToPosition = position;
+		disabled = true;
+		lerping = true;
 	}
 
 	public void pause(bool pause) {
