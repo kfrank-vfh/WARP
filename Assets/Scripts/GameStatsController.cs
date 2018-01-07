@@ -57,6 +57,7 @@ public class GameStatsController : MonoBehaviour {
 			if(playerName == null || playerName.Length == 0) {
 				playerName = "Unbekannt";
 			}
+			OptionsManager.setReflectionQualityOptions();
 		}
 	}
 

@@ -75,7 +75,7 @@ public class MenuAnimatorController : MonoBehaviour {
 		menuAnimator.SetBool("MenuVisible", false);
 		yield return new WaitForSeconds(0.5f);
 		playerController.pauseGame(false);
-		Destroy(GameObject.Find("GameStats"));
+		GameStatsController.reset();
 		SceneManager.LoadScene("MainMenu");
 	}
 

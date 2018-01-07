@@ -14,6 +14,7 @@ public class OptionsManager : MonoBehaviour {
 	private MenuAnimatorController menuAnimatorController;
 
 	private Dropdown resolutionDropdown;
+	private Dropdown framerateDropdown;
 	private Dropdown graphicsQualityDropdown;
 	private Dropdown reflectionQualityDropdown;
 	private Slider volumeSlider;
@@ -24,25 +25,37 @@ public class OptionsManager : MonoBehaviour {
 		determineUiElements();
 		initDropdownValues();
 		determineCurrentOptions();
+		AdoptCurrentOptions();
 		setCurrentOptionsInUI();
 	}
 
 	private void determineUiElements() {
 		resolutionDropdown = transform.Find("ResolutionGroup").Find("Dropdown").GetComponent<Dropdown>();
+		framerateDropdown = transform.Find("FramerateGroup").Find("Dropdown").GetComponent<Dropdown>();
 		graphicsQualityDropdown = transform.Find("GraphicsQualityGroup").Find("Dropdown").GetComponent<Dropdown>();
 		reflectionQualityDropdown = transform.Find("ReflectionQualityGroup").Find("Dropdown").GetComponent<Dropdown>();
 		volumeSlider = transform.Find("VolumeGroup").Find("Slider").GetComponent<Slider>();
 	}
 
 	private void initDropdownValues() {
-		// init resolution values
-		string[] resolutions = new string[Screen.resolutions.Length];
-		for (int i = 0; i < resolutions.Length; i++) {
+		// init resolution and framerate values
+		List<string> resolutions = new List<string>();
+		List<string> framerates = new List<string>();
+		for (int i = 0; i < Screen.resolutions.Length; i++) {
 			Resolution res = Screen.resolutions[i];
-			resolutions[i] = res.width + " x " + res.height + "px";
+			string resolution = res.width + " x " + res.height + "px";
+			if(!resolutions.Contains(resolution)) {;
+				resolutions.Add(resolution);
+			}
+			string framerate = res.refreshRate + " Hz";
+			if(!framerates.Contains(framerate)) {;
+				framerates.Add(framerate);
+			}
 		}
 		resolutionDropdown.ClearOptions();
-		resolutionDropdown.AddOptions(new List<string>(resolutions));
+		resolutionDropdown.AddOptions(resolutions);
+		framerateDropdown.ClearOptions();
+		framerateDropdown.AddOptions(framerates);
 		// init graphics quality values
 		graphicsQualityDropdown.ClearOptions();
 		graphicsQualityDropdown.AddOptions(new List<string>(QualitySettings.names));
@@ -65,8 +78,10 @@ public class OptionsManager : MonoBehaviour {
 	private Options getDefaultOptions() {
 		Options options = new Options();
 		Resolution res = Screen.resolutions[Screen.resolutions.Length - 1];
+		Debug.Log("Default Resolution: " + res);
 		options.resolutionWidth = res.width;
 		options.resolutionHeight = res.height;
+		options.framerate = res.refreshRate;
 		options.graphicsQuality = QualitySettings.names[QualitySettings.names.Length/2];
 		options.reflectionQuality = 1024;
 		options.volume = 1f;
@@ -76,10 +91,12 @@ public class OptionsManager : MonoBehaviour {
 	private void setCurrentOptionsInUI() {
 		Options opts = CURRENT_OPTIONS;
 		// set selected resolution
+		int framerateCount = framerateDropdown.options.Count;
 		for(int i = 0; i < Screen.resolutions.Length; i++) {
 			Resolution res = Screen.resolutions[i];
-			if(res.width == opts.resolutionWidth && res.height == opts.resolutionHeight) {
-				resolutionDropdown.value = i;
+			if(res.width == opts.resolutionWidth && res.height == opts.resolutionHeight && res.refreshRate == opts.framerate) {
+				resolutionDropdown.value = (int)(i / framerateCount);
+				framerateDropdown.value = i % framerateCount;
 				break;
 			}
 		}
@@ -103,9 +120,12 @@ public class OptionsManager : MonoBehaviour {
 
 	private Options getOptionsFromUI() {
 		Options opts = new Options();
-		Resolution res = Screen.resolutions[resolutionDropdown.value];
+		int resValue = resolutionDropdown.value;
+		int frValue = framerateDropdown.value;
+		Resolution res = Screen.resolutions[resValue * framerateDropdown.options.Count + frValue];
 		opts.resolutionWidth = res.width;
 		opts.resolutionHeight = res.height;
+		opts.framerate = res.refreshRate;
 		opts.graphicsQuality = graphicsQualityDropdown.options[graphicsQualityDropdown.value].text;
 		opts.reflectionQuality = REFLECTION_QUALITIES[reflectionQualityDropdown.value];
 		opts.volume = volumeSlider.value;
@@ -118,18 +138,36 @@ public class OptionsManager : MonoBehaviour {
 		CURRENT_OPTIONS = uiOptions;
 		PersistenceManager.saveData(OPTIONS_FILE, uiOptions);
 		// adopt options to unity engine
-		Screen.SetResolution(uiOptions.resolutionWidth, uiOptions.resolutionHeight, true);
-		QualitySettings.SetQualityLevel(graphicsQualityDropdown.value);
-		if(SceneManager.GetActiveScene().name.Equals("LevelScene")) {
-			GameObject[] mirrors = GameObject.FindGameObjectsWithTag("Mirrors");
-			foreach (GameObject mirror in mirrors) {
-				ReflectionProbe probe = mirror.transform.Find("ReflectionProbe").GetComponent<ReflectionProbe>();
-				probe.resolution = uiOptions.reflectionQuality;
-			}
-		}
-		AudioListener.volume = uiOptions.volume;
+		AdoptCurrentOptions();
 		// show title menu
 		menuAnimatorController.showMenu("title");
+	}
+
+	public void AdoptCurrentOptions() {
+		Screen.SetResolution(CURRENT_OPTIONS.resolutionWidth, CURRENT_OPTIONS.resolutionHeight, true);
+		Application.targetFrameRate = CURRENT_OPTIONS.framerate;
+		for(int i = 0; i < QualitySettings.names.Length; i++) {
+			if(QualitySettings.names[i].Equals(CURRENT_OPTIONS.graphicsQuality)) {
+				QualitySettings.SetQualityLevel(i);
+				break;
+			}
+		}
+		setReflectionQualityOptions();
+		AudioListener.volume = CURRENT_OPTIONS.volume;
+	}
+
+	public static void setReflectionQualityOptions() {
+		if(!SceneManager.GetActiveScene().name.Equals("LevelScene")) {
+			return;
+		}
+		GameObject[] mirrors = GameObject.FindGameObjectsWithTag("Mirrors");
+		foreach (GameObject mirror in mirrors) {
+			Transform reflectionProbe = mirror.transform.Find("ReflectionProbe");
+			if(reflectionProbe != null) {
+				ReflectionProbe probe = reflectionProbe.GetComponent<ReflectionProbe>();
+				probe.resolution = CURRENT_OPTIONS.reflectionQuality;
+			}
+		}
 	}
 
 	public void DiscardOptions() {
@@ -142,6 +180,7 @@ public class OptionsManager : MonoBehaviour {
 class Options {
 	public int resolutionWidth;
 	public int resolutionHeight;
+	public int framerate;
 	public String graphicsQuality;
 	public int reflectionQuality;
 	public float volume;

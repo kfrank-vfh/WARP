@@ -1,16 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\StorySceneController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MenuAnimatorController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MenuAnimatorController.cs" Line="78" Column="10" />
       <File FileName="Assets\Scripts\FPCameraController.cs" Line="38" Column="31" />
-      <File FileName="Assets\Scripts\TV_AnimationController.cs" Line="14" Column="1" />
-      <File FileName="Assets\Scripts\FinalDoor.cs" Line="80" Column="39" />
-      <File FileName="Assets\Scripts\GameStatsController.cs" Line="94" Column="21" />
-      <File FileName="Assets\Scripts\StorySceneController.cs" Line="72" Column="86" />
-      <File FileName="Assets\Scripts\HighscoreManager.cs" Line="45" Column="3" />
+      <File FileName="Assets\Scripts\GameStatsController.cs" Line="60" Column="49" />
+      <File FileName="Assets\Scripts\StorySceneController.cs" Line="49" Column="3" />
+      <File FileName="Assets\Scripts\HighscoreManager.cs" Line="23" Column="1" />
       <File FileName="Assets\Scripts\PersistenceManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ResetCharacter.cs" Line="20" Column="1" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="119" Column="1" />
+      <File FileName="Assets\Scripts\TV_AnimationController.cs" Line="32" Column="2" />
+      <File FileName="Assets\Scripts\OptionsManager.cs" Line="148" Column="23" />
+      <File FileName="Assets\Scripts\ReflectionRenderer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MenuAnimatorController.cs" Line="78" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
