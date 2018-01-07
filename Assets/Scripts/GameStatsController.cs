@@ -11,6 +11,7 @@ public class GameStatsController : MonoBehaviour {
 	private static float playEndTime = -1f;
 
 	private static GameObject INSTANCE;
+	private static bool highscoreDataInitialised = false;
 	private static string HIGHSCORE_FILE;
 	private static List<HighscoreEntry> CURRENT_ENTRIES;
 	private static string PLAYTHROUGHS_FILE;
@@ -30,6 +31,13 @@ public class GameStatsController : MonoBehaviour {
 			PLAYTHROUGHS = plays == null ? 0 : plays[0];
 		}
 		// load hichscore data if not loaded yet
+		if(!highscoreDataInitialised) {
+			initHighscoreData();
+			highscoreDataInitialised = true;
+		}
+	}
+
+	private static void initHighscoreData() {
 		// check if highscore file created
 		if(HIGHSCORE_FILE == null) {
 			HIGHSCORE_FILE = Application.persistentDataPath + "/highscore.dat";
@@ -78,6 +86,9 @@ public class GameStatsController : MonoBehaviour {
 	}
 
 	public static List<HighscoreEntry> getHighscoreEntries() {
+		if(!highscoreDataInitialised) {
+			initHighscoreData();
+		}
 		return CURRENT_ENTRIES;
 	}
 
