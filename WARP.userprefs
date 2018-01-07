@@ -1,13 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameStatsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\StorySceneController.cs">
     <Files>
       <File FileName="Assets\Scripts\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MenuAnimatorController.cs" Line="20" Column="31" />
-      <File FileName="Assets\Scripts\FPCameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TV_AnimationController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FinalDoor.cs" Line="50" Column="39" />
-      <File FileName="Assets\Scripts\GameStatsController.cs" Line="21" Column="58" />
+      <File FileName="Assets\Scripts\MenuAnimatorController.cs" Line="78" Column="10" />
+      <File FileName="Assets\Scripts\FPCameraController.cs" Line="38" Column="31" />
+      <File FileName="Assets\Scripts\TV_AnimationController.cs" Line="14" Column="1" />
+      <File FileName="Assets\Scripts\FinalDoor.cs" Line="80" Column="39" />
+      <File FileName="Assets\Scripts\GameStatsController.cs" Line="94" Column="21" />
+      <File FileName="Assets\Scripts\StorySceneController.cs" Line="72" Column="86" />
+      <File FileName="Assets\Scripts\HighscoreManager.cs" Line="45" Column="3" />
+      <File FileName="Assets\Scripts\PersistenceManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
