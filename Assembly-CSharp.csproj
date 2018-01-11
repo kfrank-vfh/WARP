@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Character\Animation\CharacterSMB.cs" />
      <Compile Include="Assets\Imports\Tazo_fx\Script\BillBoard.cs" />
      <Compile Include="Assets\Imports\Tazo_fx\Script\tazo_rotate.cs" />
      <Compile Include="Assets\Imports\Tazo_fx\Script\tazo_UVScroller.cs" />
