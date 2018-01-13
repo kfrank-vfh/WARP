@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\StorySceneController.cs" />
      <Compile Include="Assets\Scripts\TilingProcessor.cs" />
      <Compile Include="Assets\Scripts\TV_AnimationController.cs" />
+     <Compile Include="Assets\Scripts\WarpPSScriptController.cs" />
      <None Include="Assets\Kino\Motion\Shader\Prefilter.cginc" />
      <None Include="Assets\Kino\Motion\Shader\Reconstruction.shader" />
      <None Include="Assets\Kino\Motion\Shader\Reconstruction.cginc" />

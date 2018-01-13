@@ -54,17 +54,6 @@ public class FinalDoor : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		OnTriggerStay(other);
-	}
-
-	void OnTriggerStay(Collider other) {
-		// check if player is looking to door
-		Vector3 direction = finalDoor.transform.position - cameraObject.transform.position;
-		float angle = Vector3.Angle(direction, cameraObject.transform.forward);
-		if(angle >= 85) {
-			return;
-		}
-
 		StartCoroutine(finalCoroutine());
 		GameStatsController.setPlayEndTime(Time.time);
 		Destroy(GetComponent<CapsuleCollider>());

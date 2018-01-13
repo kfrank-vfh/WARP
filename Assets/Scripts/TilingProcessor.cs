@@ -23,7 +23,7 @@ public class TilingProcessor : MonoBehaviour {
 	private void recursiveProcessTiling(Transform transform) {
 		GameObject obj = transform.gameObject;
 		Renderer renderer = obj.GetComponent<Renderer>();
-		if(renderer != null) {
+		if(renderer != null && obj.layer != LayerMask.NameToLayer("DoNotTile")) {
 			TilingProcessor props = obj.GetComponent<TilingProcessor>();
 			Material mat = renderer.material;
 			Vector2 tiling = props == null ? getDefaultTiling(obj.transform.localScale) : props.tiling;

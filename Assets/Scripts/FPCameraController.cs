@@ -32,9 +32,9 @@ public class FPCameraController : MonoBehaviour {
 	void Update () {
 		if(lerping) {
 			Vector3 direction = lerpToPosition - cameraObject.transform.position;
-			Quaternion toRotation = Quaternion.FromToRotation(cameraObject.transform.forward, direction);
+			Quaternion toRotation = Quaternion.LookRotation(direction);
 			float lerpSpeed = lerpTime < Time.deltaTime ? 1f : Time.deltaTime / lerpTime;
-			setRotation(Quaternion.Lerp(cameraObject.transform.rotation, toRotation, lerpSpeed));
+			setRotation(Quaternion.Slerp(cameraObject.transform.rotation, toRotation, lerpSpeed));
 			lerpTime -= Time.deltaTime;
 			if(lerpTime <= 0) {
 				lerping = false;

@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 	private List<RaycastHit> warpPath;
 	private Dictionary<RaycastHit, Vector3> targetPositions;
 	private float warpSpeed;
+	private bool warpEnabled = false;
 
 	// GAME OBJECTS
 	private GameObject player;
@@ -53,7 +54,9 @@ public class PlayerController : MonoBehaviour {
 		// process moving input if state = MOVING
 		if(state == State.MOVING) {
 			processMovingInput();
-			processWarpInput();
+			if(warpEnabled) {
+				processWarpInput();
+			}
 		}
 		// process warping if state = WARPING
 		if(state == State.WARPING) {
@@ -229,6 +232,10 @@ public class PlayerController : MonoBehaviour {
 				cameraController.lookAt(lookAtPosition);
 			}
 		}
+	}
+
+	public void enableWarping() {
+		warpEnabled = true;
 	}
 
 	public void pauseGame(bool pause) {

@@ -45,7 +45,7 @@ public class TV_AnimationController : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	private void startTvAnimation() {
+	public void startTvAnimation() {
 		StartCoroutine(tvAnimationCoroutine());
 	}
 
