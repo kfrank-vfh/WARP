@@ -69,6 +69,10 @@ public class GameStatsController : MonoBehaviour {
 		playerName = name;
 	}
 
+	public static float getPlayStartTime() {
+		return playStartTime;
+	}
+
 	public static void setPlayEndTime(float time) {
 		playEndTime = time;
 	}

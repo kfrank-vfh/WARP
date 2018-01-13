@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TV_AnimationController : MonoBehaviour {
 
@@ -12,12 +13,18 @@ public class TV_AnimationController : MonoBehaviour {
 	private GameObject playerObject;
 	private Animator tvAnimator;
 
+	private Text timeText;
+	private float lastUpdate = -1;
+	private string timeDisplay;
+
 	// Use this for initialization
 	void Start () {
 		// check for type by existing animator component
 		tvAnimator = GetComponent<Animator>();
 		if(tvAnimator != null) {
 			// game object is TV
+			timeText = transform.Find("Canvas").Find("Text").GetComponent<Text>();
+			timeText.enabled = false;
 		} else if(GetComponent<Collider>() != null) {
 			// game object is trigger
 			playerObject = GameObject.Find("Player");
@@ -27,6 +34,26 @@ public class TV_AnimationController : MonoBehaviour {
 			Debug.Log("TV_AnimationController hängt weder an einem TV noch an einem TriggerCollider");
 			Destroy(this);
 		}
+	}
+
+	void Update() {
+		if(timeText == null) {
+			return;
+		}
+		if(lastUpdate < 0 || lastUpdate != Time.time) {
+			lastUpdate = Time.time;
+			timeDisplay = getDisplayStringToTime(Time.time - GameStatsController.getPlayStartTime());
+		}
+		timeText.text = timeDisplay;
+	}
+
+	private string getDisplayStringToTime(float time) {
+		int minutes = (int)(time / 60f);
+		int seconds = (int)(time % 60);
+		int millis = (int)((time * 1000) % 1000);
+		string displayString = minutes == 0 ? "" : minutes + ":";
+		displayString += seconds + ":" + millis;
+		return displayString;
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -54,5 +81,6 @@ public class TV_AnimationController : MonoBehaviour {
 		tvAnimator.SetInteger("state", 1);
 		yield return new WaitForSeconds(noiseDuration);
 		tvAnimator.SetInteger("state", 2);
+		timeText.enabled = true;
 	}
 }
