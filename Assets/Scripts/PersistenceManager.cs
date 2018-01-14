@@ -26,4 +26,8 @@ public class PersistenceManager {
 	public static string readTextResource(string filePath) {
 		return ((TextAsset) Resources.Load(filePath, typeof(TextAsset))).text;
 	}
+
+	public static AudioClip loadAudioClip(string fileName) {
+		return (AudioClip) Resources.Load(fileName, typeof(AudioClip));
+	}
 }

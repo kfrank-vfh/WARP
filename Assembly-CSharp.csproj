@@ -58,6 +58,7 @@
      <Compile Include="Assets\Kino\Motion\Motion.cs" />
      <Compile Include="Assets\Kino\Motion\Script\FrameBlendingFilter.cs" />
      <Compile Include="Assets\Kino\Motion\Script\ReconstructionFilter.cs" />
+     <Compile Include="Assets\Scripts\AudioController.cs" />
      <Compile Include="Assets\Scripts\CreditsManager.cs" />
      <Compile Include="Assets\Scripts\FinalDoor.cs" />
      <Compile Include="Assets\Scripts\FPCameraController.cs" />
