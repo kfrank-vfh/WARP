@@ -7671,7 +7671,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -9313,6 +9313,30 @@ Prefab:
         type: 2}
       propertyPath: startDelay
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107856430699650, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -20.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107856430699650, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107856430699650, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107856430699650, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107856430699650, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107856430699650, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
