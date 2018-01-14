@@ -53,8 +53,17 @@ public class TV_AnimationController : MonoBehaviour {
 		int minutes = (int)(time / 60f);
 		int seconds = (int)(time % 60);
 		int millis = (int)((time * 1000) % 1000);
-		string displayString = minutes == 0 ? "" : minutes + ":";
-		displayString += seconds + ":" + millis;
+		string displayString = "" + millis;
+		while(displayString.Length < 3) {
+			displayString = "0" + displayString;
+		}
+		displayString = seconds + ":" + displayString;
+		if(minutes > 0) {
+			if(displayString.Length < 6) {
+				displayString = "0" + displayString;
+			}
+			displayString = minutes + ":" + displayString;
+		}
 		return displayString;
 	}
 
