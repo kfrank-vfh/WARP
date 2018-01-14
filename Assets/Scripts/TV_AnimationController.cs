@@ -10,6 +10,7 @@ public class TV_AnimationController : MonoBehaviour {
 	public bool isMonitor2 = false;
 
 	private TV_AnimationController parentController;
+	private AudioController audioController;
 	private GameObject playerObject;
 	private Animator tvAnimator;
 
@@ -23,6 +24,7 @@ public class TV_AnimationController : MonoBehaviour {
 		tvAnimator = GetComponent<Animator>();
 		if(tvAnimator != null) {
 			// game object is TV
+			audioController = GetComponent<AudioController>();
 			timeText = transform.Find("Canvas").Find("Text").GetComponent<Text>();
 			timeText.enabled = false;
 		} else if(GetComponent<Collider>() != null) {
@@ -79,6 +81,7 @@ public class TV_AnimationController : MonoBehaviour {
 	private IEnumerator tvAnimationCoroutine() {
 		yield return new WaitForSeconds(startDelay);
 		tvAnimator.SetInteger("state", 1);
+		audioController.playMonitorNoise(noiseDuration);
 		yield return new WaitForSeconds(noiseDuration);
 		tvAnimator.SetInteger("state", 2);
 		timeText.enabled = true;

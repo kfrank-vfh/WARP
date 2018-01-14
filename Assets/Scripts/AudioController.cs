@@ -10,6 +10,7 @@ public class AudioController : MonoBehaviour {
 
 	private static AudioClip footstepClip;
 	private static AudioClip jumpClip;
+	private static AudioClip noiseClip;
 
 	private AudioSource audioSource;
 
@@ -26,6 +27,7 @@ public class AudioController : MonoBehaviour {
 		// init clips
 		footstepClip = PersistenceManager.loadAudioClip("footstep_metallic");
 		jumpClip = PersistenceManager.loadAudioClip("jump_metallic");
+		noiseClip = PersistenceManager.loadAudioClip("noise");
 		// TODO		
 	}
 
@@ -55,6 +57,16 @@ public class AudioController : MonoBehaviour {
 	public void playJumpSound() {
 		audioSource.pitch = 1f;
 		audioSource.PlayOneShot(jumpClip);
+	}
+
+	public void playMonitorNoise(float duration) {
+		StartCoroutine(monitorNoiseCoroutine(duration));
+	}
+
+	private IEnumerator monitorNoiseCoroutine(float duration) {
+		audioSource.PlayOneShot(noiseClip, 0.8f);
+		yield return new WaitForSeconds(duration);
+		audioSource.Stop();
 	}
 
 	public static void setMasterVolume(float volume) {
