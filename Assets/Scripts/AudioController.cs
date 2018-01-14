@@ -11,6 +11,8 @@ public class AudioController : MonoBehaviour {
 	private static AudioClip footstepClip;
 	private static AudioClip jumpClip;
 	private static AudioClip noiseClip;
+	private static AudioClip blowClip;
+	private static AudioClip woundedClip;
 
 	private AudioSource audioSource;
 
@@ -28,6 +30,8 @@ public class AudioController : MonoBehaviour {
 		footstepClip = PersistenceManager.loadAudioClip("footstep_metallic");
 		jumpClip = PersistenceManager.loadAudioClip("jump_metallic");
 		noiseClip = PersistenceManager.loadAudioClip("noise");
+		blowClip = PersistenceManager.loadAudioClip("blow");
+		woundedClip = PersistenceManager.loadAudioClip("wound");
 		// TODO		
 	}
 
@@ -67,6 +71,11 @@ public class AudioController : MonoBehaviour {
 		audioSource.PlayOneShot(noiseClip, 0.8f);
 		yield return new WaitForSeconds(duration);
 		audioSource.Stop();
+	}
+
+	public void playDropWoundedSound() {
+		audioSource.PlayOneShot(blowClip);
+		audioSource.PlayOneShot(woundedClip);
 	}
 
 	public static void setMasterVolume(float volume) {
