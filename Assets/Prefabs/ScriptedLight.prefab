@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114172789869117628}
   - component: {fileID: 82603563753275826}
   - component: {fileID: 114325107121592578}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ScriptedLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
