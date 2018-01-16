@@ -10,6 +10,7 @@ public class FinalDoor : MonoBehaviour {
 	private GameObject cameraObject;
 	private FPCameraController cameraController;
 	private Animator doorAnimator;
+	private AudioController audioController;
 
 	private bool openDoor = false;
 	private bool fogFadeOut = false;
@@ -21,7 +22,8 @@ public class FinalDoor : MonoBehaviour {
 		playerController = GameObject.Find("/Player").GetComponent<PlayerController>();
 		cameraObject = GameObject.Find("/Player/FirstPerson/Camera");
 		cameraController = cameraObject.GetComponent<FPCameraController>();
-		doorAnimator = transform.parent.GetComponent<Animator>();
+		doorAnimator = finalDoor.GetComponent<Animator>();
+		audioController = finalDoor.GetComponent<AudioController>();
 
 		fogFadeOut = true;
 		startTime = Time.time;
@@ -66,6 +68,7 @@ public class FinalDoor : MonoBehaviour {
 		doorAnimator.SetTrigger("open");
 		startTime = Time.time;
 		openDoor = true;
+		audioController.playDoorOpenSound();
 		yield return new WaitForSeconds(2f);
 		SceneManager.LoadScene("StoryScene");
 	}
