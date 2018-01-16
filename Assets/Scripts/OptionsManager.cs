@@ -170,6 +170,10 @@ public class OptionsManager : MonoBehaviour {
 		}
 	}
 
+	public static void setVolumeSettings() {
+		AudioController.setMasterVolume(CURRENT_OPTIONS.volume);
+	}
+
 	public void DiscardOptions() {
 		setCurrentOptionsInUI();
 		menuAnimatorController.showMenu("title");

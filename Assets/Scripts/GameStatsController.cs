@@ -58,6 +58,7 @@ public class GameStatsController : MonoBehaviour {
 				playerName = "Unbekannt";
 			}
 			OptionsManager.setReflectionQualityOptions();
+			OptionsManager.setVolumeSettings();
 		}
 	}
 

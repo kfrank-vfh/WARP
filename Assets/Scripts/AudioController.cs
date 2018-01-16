@@ -100,6 +100,8 @@ public class AudioController : MonoBehaviour {
 	}
 
 	public static void setMasterVolume(float volume) {
-		audioMixer.SetFloat("volume", volume);
+		if(audioMixer != null) {
+			audioMixer.SetFloat("volume", volume);
+		}
 	}
 }
