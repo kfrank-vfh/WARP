@@ -19,6 +19,7 @@ public class AudioController : MonoBehaviour {
 	private static AudioClip buttonHoverClip;
 	private static AudioClip buttonAcceptClip;
 	private static AudioClip buttonBackClip;
+	private static AudioClip letterClip;
 
 	private AudioSource audioSource;
 
@@ -44,6 +45,7 @@ public class AudioController : MonoBehaviour {
 		buttonHoverClip = PersistenceManager.loadAudioClip("buttonhover");
 		buttonAcceptClip = PersistenceManager.loadAudioClip("buttonaccept");
 		buttonBackClip = PersistenceManager.loadAudioClip("buttoncancel");
+		letterClip = PersistenceManager.loadAudioClip("letter");
 	}
 
 	private bool initPerGameObject() {
@@ -117,6 +119,11 @@ public class AudioController : MonoBehaviour {
 	public void playButtonBackClip() {
 		audioSource.pitch = 1f;
 		audioSource.PlayOneShot(buttonBackClip);
+	}
+
+	public void playLetterClip(float pitch = 1f) {
+		audioSource.pitch = pitch;
+		audioSource.PlayOneShot(letterClip, 0.5f);
 	}
 
 	public static void setMasterVolume(float volume) {

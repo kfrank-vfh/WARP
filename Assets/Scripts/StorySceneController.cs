@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class StorySceneController : MonoBehaviour {
 
-	private float lettersPerSecond = 15;
+	private AudioController audioController;
 
 	// Use this for initialization
 	void Start () {
+		audioController = GetComponent<AudioController>();
 		// check if intro or outro
 		if(GameStatsController.isIntro()) {
 			showIntro();
@@ -29,11 +30,11 @@ public class StorySceneController : MonoBehaviour {
 
 	private IEnumerator introCoroutine(Text text1, Text text2, Text text3) {
 		yield return new WaitForSeconds(0.5f);
-		yield return StartCoroutine(showTextCoroutine(text1));
+		yield return StartCoroutine(showTextCoroutine(text1, 15, false));
 		yield return new WaitForSeconds(0.5f);
-		yield return StartCoroutine(showTextCoroutine(text2));
+		yield return StartCoroutine(showTextCoroutine(text2, 15, false));
 		yield return new WaitForSeconds(0.5f);
-		yield return StartCoroutine(showTextCoroutine(text3));
+		yield return StartCoroutine(showTextCoroutine(text3, 15, false));
 		yield return new WaitForSeconds(1f);
 		yield return StartCoroutine(fadeOutTextCoroutine(new Text[] {text1, text2, text3}, 1f));
 		SceneManager.LoadScene("LevelScene");
@@ -109,26 +110,31 @@ public class StorySceneController : MonoBehaviour {
 
 	private IEnumerator outroCoroutine(Text[] storyTexts, Text[] highscoreTexts, Image[] highscoreImages) {
 		yield return new WaitForSeconds(0.5f);
-		yield return StartCoroutine(showTextCoroutine(storyTexts[0]));
+		yield return StartCoroutine(showTextCoroutine(storyTexts[0], 25, true));
 		yield return new WaitForSeconds(0.5f);
-		yield return StartCoroutine(showTextCoroutine(storyTexts[1]));
+		yield return StartCoroutine(showTextCoroutine(storyTexts[1], 25, true));
 		yield return new WaitForSeconds(0.5f);
-		yield return StartCoroutine(showTextCoroutine(storyTexts[2]));
+		yield return StartCoroutine(showTextCoroutine(storyTexts[2], 25, true));
 		yield return new WaitForSeconds(1f);
 		yield return StartCoroutine(fadeOutTextCoroutine(storyTexts, 1f));
 		yield return new WaitForSeconds(1f);
 		StartCoroutine(fadeInHighscorePanel(highscoreTexts, highscoreImages, 1f));
 	}
 
-	private IEnumerator showTextCoroutine(Text text) {
+	private IEnumerator showTextCoroutine(Text text, float lettersPerSecond, bool randomPitch) {
 		float timePerLetter = 1 / lettersPerSecond;
 		string value = text.text;
 		text.text = "";
 		if(text.color.a < 1f) {
 			text.color = changeAlpha(text.color, 1f);
 		}
+		float lastSoundTime = 0;
 		foreach (char c in value.ToCharArray()) {
 			text.text += c;
+			if(c != ' ' && Time.time - lastSoundTime > 0.1) {
+				audioController.playLetterClip(randomPitch ? UnityEngine.Random.Range(0.95f, 1.05f) : 0.95f);
+				lastSoundTime = Time.time;
+			}
 			yield return new WaitForSeconds(timePerLetter);
 		}
 	}
