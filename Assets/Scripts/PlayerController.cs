@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
 	private CharacterController characterController;
 	private ParticleSystem particleComponent;
 	private Kino.Motion motionBlurComponent;
+	private AudioController audioController;
 
 	void Start () {
 		// init game objects
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 		characterController = GetComponent<CharacterController>();
 		particleComponent = particleObject.GetComponent<ParticleSystem>();
 		motionBlurComponent = cameraObject.GetComponent<Kino.Motion>();
+		audioController = player.transform.Find("ThirdPerson/DefaultAvatar").GetComponent<AudioController>();
 		// set initial state
 		state = State.MOVING;
 		motionBlurComponent.enabled = false;
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour {
 		setWarpPath(rayPath);
 		state = State.WARPING;
 		motionBlurComponent.enabled = true;
+		audioController.playWarpSound();
 	}
 
 	private List<RaycastHit> doRaycast(Vector3 origin, Vector3 direction) {
