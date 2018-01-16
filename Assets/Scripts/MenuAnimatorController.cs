@@ -9,6 +9,7 @@ public class MenuAnimatorController : MonoBehaviour {
 	private Animator menuAnimator;
 	private Canvas canvas;
 	private PlayerController playerController;
+	private AudioController audioController;
 
 	private Dictionary<string, int> menuToId;
 
@@ -17,6 +18,7 @@ public class MenuAnimatorController : MonoBehaviour {
 		// get menu animator
 		menuAnimator = gameObject.GetComponent<Animator>();
 		canvas = GetComponent<Canvas>();
+		audioController = GetComponent<AudioController>();
 		// map sub menu names to ids
 		menuToId = new Dictionary<string, int>();
 		menuToId.Add("title", 0);

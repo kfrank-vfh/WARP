@@ -16,6 +16,9 @@ public class AudioController : MonoBehaviour {
 	private static AudioClip warpClip;
 	private static AudioClip doorOpenClip;
 	private static AudioClip lightsOnClip;
+	private static AudioClip buttonHoverClip;
+	private static AudioClip buttonAcceptClip;
+	private static AudioClip buttonBackClip;
 
 	private AudioSource audioSource;
 
@@ -38,7 +41,9 @@ public class AudioController : MonoBehaviour {
 		warpClip = PersistenceManager.loadAudioClip("gaze");
 		doorOpenClip = PersistenceManager.loadAudioClip("dooropen");
 		lightsOnClip = PersistenceManager.loadAudioClip("lights on");
-		// TODO		
+		buttonHoverClip = PersistenceManager.loadAudioClip("buttonhover");
+		buttonAcceptClip = PersistenceManager.loadAudioClip("buttonaccept");
+		buttonBackClip = PersistenceManager.loadAudioClip("buttoncancel");
 	}
 
 	private bool initPerGameObject() {
@@ -97,6 +102,21 @@ public class AudioController : MonoBehaviour {
 	public void playLightsOnSound() {
 		audioSource.pitch = 1f;
 		audioSource.PlayOneShot(lightsOnClip);
+	}
+
+	public void playButtonHoverClip() {
+		audioSource.pitch = 1f;
+		audioSource.PlayOneShot(buttonHoverClip);
+	}
+
+	public void playButtonAcceptClip() {
+		audioSource.pitch = 1f;
+		audioSource.PlayOneShot(buttonAcceptClip);
+	}
+
+	public void playButtonBackClip() {
+		audioSource.pitch = 1f;
+		audioSource.PlayOneShot(buttonBackClip);
 	}
 
 	public static void setMasterVolume(float volume) {
