@@ -1522,7 +1522,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5376,7 +5376,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 8200000, guid: 1502d27b5b1167e4c8b8c85d7546b34f, type: 2}
       propertyPath: m_Volume
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 1502d27b5b1167e4c8b8c85d7546b34f, type: 2}
       propertyPath: InitialModule.startLifetime.scalar
@@ -5412,6 +5412,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 8200000, guid: 1502d27b5b1167e4c8b8c85d7546b34f, type: 2}
       propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 1502d27b5b1167e4c8b8c85d7546b34f, type: 2}
+      propertyPath: MaxDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 1502d27b5b1167e4c8b8c85d7546b34f, type: 2}
+      propertyPath: rolloffMode
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5944,10 +5952,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0
+  MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -5974,7 +5982,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7260,6 +7268,11 @@ Prefab:
       propertyPath: m_Size.z
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 82603563753275826, guid: dcd5039870f89f34a9a69dda13de3ed4,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcd5039870f89f34a9a69dda13de3ed4, type: 2}
   m_IsPrefabParent: 0
@@ -8083,7 +8096,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -17392,7 +17405,7 @@ Prefab:
     - target: {fileID: 224412995798510894, guid: efb58ad41c2ad34418e66e560479ac22,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0.9999756
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224959189763775234, guid: efb58ad41c2ad34418e66e560479ac22,
         type: 2}
@@ -19196,6 +19209,11 @@ Prefab:
         type: 2}
       propertyPath: m_Intensity
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 82603563753275826, guid: dcd5039870f89f34a9a69dda13de3ed4,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcd5039870f89f34a9a69dda13de3ed4, type: 2}
@@ -21569,7 +21587,7 @@ Prefab:
     - target: {fileID: 114258257110908374, guid: e579455c1fadc4f4f822e31149387cb5,
         type: 2}
       propertyPath: startDelay
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4708628231493254, guid: e579455c1fadc4f4f822e31149387cb5, type: 2}
       propertyPath: m_LocalScale.x
@@ -22049,6 +22067,11 @@ Prefab:
         type: 2}
       propertyPath: m_Intensity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82603563753275826, guid: dcd5039870f89f34a9a69dda13de3ed4,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcd5039870f89f34a9a69dda13de3ed4, type: 2}

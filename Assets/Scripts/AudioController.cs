@@ -60,7 +60,7 @@ public class AudioController : MonoBehaviour {
 	}
 
 	public void playFootstepSound() {
-		audioSource.pitch = Random.Range(0.9f, 1.1f);
+		audioSource.pitch = Random.Range(0.95f, 1.05f);
 		audioSource.PlayOneShot(footstepClip, Random.Range(0.5f, 0.7f));
 	}
 
