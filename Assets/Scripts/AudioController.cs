@@ -15,6 +15,7 @@ public class AudioController : MonoBehaviour {
 	private static AudioClip woundedClip;
 	private static AudioClip warpClip;
 	private static AudioClip doorOpenClip;
+	private static AudioClip lightsOnClip;
 
 	private AudioSource audioSource;
 
@@ -36,6 +37,7 @@ public class AudioController : MonoBehaviour {
 		woundedClip = PersistenceManager.loadAudioClip("wound");
 		warpClip = PersistenceManager.loadAudioClip("gaze");
 		doorOpenClip = PersistenceManager.loadAudioClip("dooropen");
+		lightsOnClip = PersistenceManager.loadAudioClip("lights on");
 		// TODO		
 	}
 
@@ -90,6 +92,11 @@ public class AudioController : MonoBehaviour {
 	public void playDoorOpenSound() {
 		audioSource.pitch = 1f;
 		audioSource.PlayOneShot(doorOpenClip);
+	}
+
+	public void playLightsOnSound() {
+		audioSource.pitch = 1f;
+		audioSource.PlayOneShot(lightsOnClip);
 	}
 
 	public static void setMasterVolume(float volume) {

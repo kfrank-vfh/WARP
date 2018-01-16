@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\FPCameraController.cs" />
      <Compile Include="Assets\Scripts\GameStatsController.cs" />
      <Compile Include="Assets\Scripts\HighscoreManager.cs" />
+     <Compile Include="Assets\Scripts\LightController.cs" />
      <Compile Include="Assets\Scripts\MenuAnimatorController.cs" />
      <Compile Include="Assets\Scripts\OptionsManager.cs" />
      <Compile Include="Assets\Scripts\PersistenceManager.cs" />
