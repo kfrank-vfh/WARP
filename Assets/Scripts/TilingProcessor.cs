@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TilingProcessor : MonoBehaviour {
 
+	private static string MAINTEX = "_MainTex";
+	private static string BUMPMAP = "_BumpMap";
+	private static string ILLUM = "_Illum";
+
 	private bool processed = false;
 
 	private Vector2 defaultOffset = new Vector2(0, 0);
@@ -33,10 +37,18 @@ public class TilingProcessor : MonoBehaviour {
 			Material mat = renderer.material;
 			Vector2 tiling = props == null ? getDefaultTiling(obj.transform.localScale) : props.tiling;
 			Vector2 offset = props == null ? defaultOffset : props.offset;
-			mat.SetTextureScale("_MainTex", tiling);
-			mat.SetTextureScale("_BumpMap", tiling);
-			mat.SetTextureOffset("_MainTex", offset);
-			mat.SetTextureOffset("_BumpMap", offset);
+			if(mat.HasProperty(MAINTEX)) {
+				mat.SetTextureScale(MAINTEX, tiling);
+				mat.SetTextureOffset(MAINTEX, offset);
+			}
+			if(mat.HasProperty(BUMPMAP)) {
+				mat.SetTextureScale(BUMPMAP, tiling);
+				mat.SetTextureOffset(BUMPMAP, offset);
+			}
+			if(mat.HasProperty(ILLUM)) {
+				mat.SetTextureScale(ILLUM, tiling);
+				mat.SetTextureOffset(ILLUM, offset);
+			}
 		}
 		foreach (Transform child in transform) {
 			recursiveProcessTiling(child);
