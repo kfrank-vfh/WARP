@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TilingProcessor : MonoBehaviour {
 
@@ -14,9 +15,13 @@ public class TilingProcessor : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if(!processed) {
+			if(SceneManager.GetActiveScene().name.Equals("MainMenu")) {
+				recursiveProcessTiling(GameObject.Find("/Background").transform);
+			} else if (SceneManager.GetActiveScene().name.Equals("LevelScene")) {
+				recursiveProcessTiling(GameObject.Find("Rooms").transform);
+				recursiveProcessTiling(GameObject.Find("Corridors").transform);
+			}
 			processed = true;
-			recursiveProcessTiling(GameObject.Find("Rooms").transform);
-			recursiveProcessTiling(GameObject.Find("Corridors").transform);
 		}
 	}
 
