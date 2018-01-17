@@ -1,3 +1,31 @@
-Das sind Test Credits!
+W.A.R.P.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Erstellt durch Kevin Frank
+im Rahmen des Moduls "Game Design" der VFH,
+abgegeben am 21.01.2018
+
+-- Verwendere Ressourcen --
+
+Texturen, Sprites und Materialien
+
+- "Detailed Devices" von Freepik, https://www.flaticon.com/free-icon/mouse_114719#term=mouse&page=1&position=34
+- "Sci-fi Platforms" von Coostvenay, https://www.assetstore.unity3d.com/en/#!/content/83091
+- "Metal Creates Pack" von Eldanu Games Studio, https://www.assetstore.unity3d.com/en/#!/content/8836
+- "Yughues Free Metal Materials" von Nobiax / Yughues, https://www.assetstore.unity3d.com/en/#!/content/12949
+
+
+Modelle, Animationen und andere Effekte
+
+- "Wall TVset" von 3d.rina, https://www.assetstore.unity3d.com/en/#!/content/8468
+- "Extreme Sci-Fi LITE" von Aquarius Max, https://www.assetstore.unity3d.com/en/#!/content/50727
+- "Buff Loop FX" von Dr.Game, https://www.assetstore.unity3d.com/en/#!/content/34104
+- "Raw Mocap Data for Mecanim" von Unity Technologies, https://www.assetstore.unity3d.com/en/#!/content/5330
+- "KinoMotion" von Keijiro Takahashi, https://github.com/keijiro/KinoMotion
+
+
+Audio und Sounds
+
+- "Science Fiction: Ambience Sound Free Collection" von ProjektJR, https://www.assetstore.unity3d.com/en/#!/content/99734
+- "FOOTSTEPS, METAL - BOOTS" von Sounddogs, https://retired.sounddogs.com/results.asp?Type=1&CategoryID=1023&SubcategoryID=34
+- "White Noise Sound Effect" von PartnersInRhyme, https://www.partnersinrhyme.com/soundfx/noise_sound/noise_white-noise_wav.shtml
+- "Mechanism Breakerlightswitchonsmalldistant 003" von SoundBoom, http://www.soundsboom.com/sound/121489/other-industry-and-machines-mechanism-breakerlightswitchonsmalldistant-003
